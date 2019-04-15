@@ -117,6 +117,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , ID_IT_OS_MEC_CLI_ITEM"
                                         . " , OPCAO_CLI_ITEM "
                                         . " , OBSERVACAO_CLI_ITEM "
+                                        . " , DTHR_CLI_ITEM "
                                         . " ) "
                                         . " VALUES ("
                                         . " INTERFACE.ITEM_CHECKLIST_SEQ.NEXTVAL "
@@ -124,6 +125,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , null"
+                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             } else {
 
@@ -133,6 +135,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , ID_IT_OS_MEC_CLI_ITEM"
                                         . " , OPCAO_CLI_ITEM "
                                         . " , OBSERVACAO_CLI_ITEM "
+                                        . " , DTHR_CLI_ITEM "
                                         . " ) "
                                         . " VALUES ("
                                         . " INTERFACE.ITEM_CHECKLIST_SEQ.NEXTVAL "
@@ -140,6 +143,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , '" . $i->obsRespItem . "' "
+                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             }
 
@@ -215,6 +219,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , ID_IT_OS_MEC_CLI_ITEM"
                                         . " , OPCAO_CLI_ITEM "
                                         . " , OBSERVACAO_CLI_ITEM "
+                                        . " , DTHR_CLI_ITEM "
                                         . " ) "
                                         . " VALUES ("
                                         . " INTERFACE.ITEM_CHECKLIST_SEQ.NEXTVAL "
@@ -222,6 +227,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , null"
+                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             } else {
 
@@ -231,6 +237,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , ID_IT_OS_MEC_CLI_ITEM"
                                         . " , OPCAO_CLI_ITEM "
                                         . " , OBSERVACAO_CLI_ITEM "
+                                        . " , DTHR_CLI_ITEM "
                                         . " ) "
                                         . " VALUES ("
                                         . " INTERFACE.ITEM_CHECKLIST_SEQ.NEXTVAL "
@@ -238,6 +245,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , '" . $i->obsRespItem . "' "
+                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             }
 
