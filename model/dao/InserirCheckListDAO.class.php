@@ -5,8 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
-
+require_once ('./dbutil/Conn.class.php');
 /**
  * Description of InserirCheckList
  *
@@ -125,7 +124,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , null"
-                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
+                                        . " ,  TO_DATE('" . $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             } else {
 
@@ -143,7 +142,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , '" . $i->obsRespItem . "' "
-                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
+                                        . " ,  TO_DATE('" . $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             }
 
@@ -227,7 +226,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , null"
-                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
+                                        . " ,  TO_DATE('" . $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             } else {
 
@@ -245,7 +244,7 @@ class InserirCheckListDAO extends Conn {
                                         . " , " . $i->idItOsMecanRespItem
                                         . " , " . $i->opcaoRespItem
                                         . " , '" . $i->obsRespItem . "' "
-                                        . " ,  TO_DATE('" .  $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
+                                        . " ,  TO_DATE('" . $i->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                                         . " )";
                             }
 

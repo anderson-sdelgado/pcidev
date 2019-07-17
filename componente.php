@@ -1,14 +1,7 @@
 <?php
 
-require('./dao/ComponenteDAO.class.php');
+require('./control/ComponenteCTR.class.php');
 
-$componenteDAO = new ComponenteDAO();
+$componenteCTR = new ComponenteCTR();
 
-//cria o array associativo
-$dados = array("dados"=>$componenteDAO->dados());
-
-//converte o conteúdo do array associativo para uma string JSON
-$json_str = json_encode($dados);
-
-//imprime a string JSON
-echo $json_str;
+echo $componenteCTR->dados();

@@ -5,14 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
-
+require_once ('./dbutil/Conn.class.php');
 /**
  * Description of VerOSDAO
  *
  * @author anderson
  */
-class VerOSDAO extends Conn {
+class OSDAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -21,7 +20,7 @@ class VerOSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($valor) {
+    public function dados($dado) {
 
         $this->Conn = parent::getConn();
 
@@ -35,15 +34,15 @@ class VerOSDAO extends Conn {
                 . " FROM "
                 . " USINAS.V_OS_CHECKLIST_IND "
                 . " WHERE "
-                . " OFICSECAO_ID = " . $valor . " "
-//                . " AND "
-//                . " ((PERIODO = 1 "
-//                . " AND "
-//                . " SYSDATE BETWEEN DT_INI_TURNO and DT_FIM_TURNO) "
-//                . " OR "
-//                . " (PERIODO > 1 "
-//                . " AND " 
-//                . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC))"
+                . " OFICSECAO_ID = " . $dado
+                . " AND "
+                . " ((PERIODO = 1 "
+                . " AND "
+                . " SYSDATE BETWEEN DT_INI_TURNO and DT_FIM_TURNO) "
+                . " OR "
+                . " (PERIODO > 1 "
+                . " AND " 
+                . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC))"
                 ;
 
         $this->Read = $this->Conn->prepare($select);

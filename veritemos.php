@@ -1,16 +1,12 @@
 <?php
 
-require('./dao/VerItemOSDAO.class.php');
+require('./control/ItemOSCTR.class.php');
 
-$verItemOSDAO = new VerItemOSDAO();
+$itemOSCTR = new ItemOSCTR();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):
 
-    //$dados = '{"dados":[{"equip":663,"os":994349}]}';
+    echo $retorno = $itemOSCTR->dados($info);
 
-    $dados = array("dados" => $verItemOSDAO->dados($info['dado']));
-    $json_str = json_encode($dados);
-    echo $json_str;
-    
 endif;
