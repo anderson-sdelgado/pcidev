@@ -7,6 +7,6 @@ $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 if (isset($info)):
 
     $inserirDadosCTR = new InserirDadosCTR();
-    echo $inserirDadosMecanCTR->salvarDados($info, "inserirchecklist");
+    echo $inserirDadosCTR->salvarDados($info, "inserirchecklist");
 
 endif;

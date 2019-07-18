@@ -64,10 +64,12 @@ class AtualAplicDAO extends Conn {
 
             $this->Create = $this->Conn->prepare($sql);
             $this->Create->execute();
+            
         } else {
 
             $select = " SELECT "
                     . " VERSAO_NOVA "
+                    . " , VERSAO_ATUAL"
                     . " FROM "
                     . " PCI_ATUALIZACAO "
                     . " WHERE "
@@ -80,42 +82,41 @@ class AtualAplicDAO extends Conn {
 
             foreach ($result as $item) {
                 $vn = $item['VERSAO_NOVA'];
+                $vab = $item['VERSAO_ATUAL'];
             }
 
-            if ($va != $vn) {
-                $retorno = 'S';
-            } else {
+            if ($va != $vab) {
 
-                $retorno = 'N';
-
-                $select = " SELECT "
-                        . " VERSAO_ATUAL "
-                        . " FROM "
-                        . " PCI_ATUALIZACAO "
+                $sql = "UPDATE PCI_ATUALIZACAO "
+                        . " SET "
+                        . " VERSAO_ATUAL = TRIM(TO_CHAR(" . $va . ", '99999999D99'))"
+                        . " , VERSAO_NOVA = TRIM(TO_CHAR(" . $va . ", '99999999D99'))"
+                        . " , DTHR_ULT_ATUAL = SYSDATE "
                         . " WHERE "
                         . " NUMERO = " . $celular;
-                ;
 
-                $this->Read = $this->Conn->prepare($select);
-                $this->Read->setFetchMode(PDO::FETCH_ASSOC);
-                $this->Read->execute();
-                $result = $this->Read->fetchAll();
+                $this->Create = $this->Conn->prepare($sql);
+                $this->Create->execute();
+                
+            } else {
+            
+                if ($va != $vn) {
+                    $retorno = 'S';
+                } else {
 
-                foreach ($result as $item) {
-                    $vab = $item['VERSAO_ATUAL'];
-                }
+                    if (strcmp($va, $vab) <> 0) {
 
-                if ($va != $vab) {
+                        $sql = "UPDATE PBM_ATUALIZACAO "
+                                . " SET "
+                                . " VERSAO_ATUAL = TRIM(TO_CHAR(" . $va . ", '99999999D99'))"
+                                . " , DTHR_ULT_ATUAL = SYSDATE "
+                                . " WHERE "
+                                . " NUMERO = " . $celular;
 
-                    $sql = "UPDATE PCI_ATUALIZACAO "
-                            . " SET "
-                            . " VERSAO_ATUAL = TRIM(TO_CHAR(" . $va . ", '99999999D99'))"
-                            . " , DTHR_ULT_ATUAL = SYSDATE "
-                            . " WHERE "
-                            . " NUMERO = " . $celular;
-
-                    $this->Create = $this->Conn->prepare($sql);
-                    $this->Create->execute();
+                        $this->Create = $this->Conn->prepare($sql);
+                        $this->Create->execute();
+                        
+                    }
                 }
             }
         }

@@ -59,7 +59,7 @@ class ItemDAO extends Conn {
                 . " ) "
                 . " VALUES ("
                 . " INTERFACE.ITEM_CHECKLIST_SEQ.NEXTVAL "
-                . " , " . $id
+                . " , " . $idCab
                 . " , " . $item->idItOsMecanRespItem
                 . " , " . $item->opcaoRespItem
                 . " , " . $obs

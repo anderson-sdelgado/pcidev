@@ -67,5 +67,10 @@ class InserirDadosCTR {
             }
         }
     }
+    
+    private function salvarLog($dados, $pagina) {
+        $logDAO = new LogDAO();
+        $logDAO->salvarDados($dados, $pagina);
+    }
 
 }

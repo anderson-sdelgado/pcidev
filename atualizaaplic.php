@@ -10,6 +10,3 @@ if (isset($info)):
    echo $atualAplicCTR->verAtualAplic($info);
 
 endif;
-
-
-//$dados = '{"dados":[{"idEquipAtualizacao":663,"versaoAtual":"1.1"}]}';
