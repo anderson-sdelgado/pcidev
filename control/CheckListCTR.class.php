@@ -14,9 +14,9 @@ require_once('./model/dao/ItemDAO.class.php');
  *
  * @author anderson
  */
-class InserirDadosCTR {
+class CheckListCTR {
 
-    //put your code here
+    private $base = 2;
 
     public function salvarDados($info, $pagina) {
 

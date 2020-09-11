@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of ItemDAO
  *
@@ -20,7 +20,7 @@ class ServicoDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados() {
+    public function dados($base) {
 
         $select = " SELECT "
                     . " SERVICO_ID AS \"idServico\" " 
@@ -29,7 +29,7 @@ class ServicoDAO extends Conn {
                 . " FROM "
                     . " USINAS.V_SERVICOS_IND ";
         
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();

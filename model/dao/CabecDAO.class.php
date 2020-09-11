@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of CabecalhoDAO
  *
@@ -13,7 +13,7 @@ require_once ('./dbutil/Conn.class.php');
  */
 class CabecDAO extends Conn {
 
-    public function verifCabec($cab) {
+    public function verifCabec($cab, $base) {
 
         $select = " SELECT "
                 . " COUNT(*) AS QTDE "
@@ -22,7 +22,7 @@ class CabecDAO extends Conn {
                 . " WHERE "
                 . " OS_CLI_CABEC = " . $cab->osCabec . " ";
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -35,7 +35,7 @@ class CabecDAO extends Conn {
         return $v;
     }
 
-    public function idCabec($cab) {
+    public function idCabec($cab, $base) {
 
         $select = " SELECT "
                 . " ID_CLI_CABEC AS ID "
@@ -46,7 +46,7 @@ class CabecDAO extends Conn {
                 . " AND "
                 . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec . " ";
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -59,7 +59,7 @@ class CabecDAO extends Conn {
         return $id;
     }
 
-    public function insCabec($cab) {
+    public function insCabec($cab, $base) {
 
         $sql = "INSERT INTO CHECKLIST_INDUSTRIA_CABECALHO ("
                 . " ID_CLI_CABEC "
@@ -76,12 +76,12 @@ class CabecDAO extends Conn {
                 . " , " . $cab->statusCabec
                 . " )";
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }
     
-    public function updCabec($cab) {
+    public function updCabec($cab, $base) {
 
         $sql = "INSERT INTO CHECKLIST_INDUSTRIA_CABECALHO ("
                 . " ID_CLI_CABEC "
@@ -98,7 +98,7 @@ class CabecDAO extends Conn {
                 . " , " . $cab->statusCabec
                 . " )";
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }

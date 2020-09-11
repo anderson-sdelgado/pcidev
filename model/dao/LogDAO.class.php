@@ -17,9 +17,9 @@ class LogDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function salvarDados($dados, $pagina) {
+    public function salvarDados($dados, $pagina, $base) {
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
 
         $sql = "INSERT INTO DADOS_MOBILE ("
                 . " DTHR "

@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of VerItemDAO
  *
@@ -20,9 +20,9 @@ class ItemOSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($dado) {
+    public function dados($dado, $base) {
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
 
         $select = " SELECT "
                 . " ITOSMECAN_ID AS \"idItem\" "

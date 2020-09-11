@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of PlantaDAO
  *
@@ -20,7 +20,7 @@ class PlantaDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados() {
+    public function dados($base) {
 
         $select = " SELECT "
                     . " COMPONENTE_ID AS \"idPlanta\" "
@@ -29,7 +29,7 @@ class PlantaDAO extends Conn {
                 . " FROM "
                     . " USINAS.V_PLANTAS_CHECKLIST_IND ";
         
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();

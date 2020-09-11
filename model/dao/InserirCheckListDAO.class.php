@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of InserirCheckList
  *
@@ -20,9 +20,9 @@ class InserirCheckListDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function salvarDados($dadosCab, $dadosItem) {
+    public function salvarDados($dadosCab, $dadosItem, $base) {
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
 
         $retorno = "";
 

@@ -5,16 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
-
+require_once('../dbutil/Conn.class.php');
 /**
  * Description of ItemDAO
  *
  * @author anderson
  */
-class ItemDAO extends Conn {
+class RespItemDAO extends Conn {
 
-    public function verifItem($idCab, $item) {
+    public function verifRespItem($idCab, $item, $base) {
 
         $select = " SELECT "
                 . " COUNT(*) AS QTDE "
@@ -27,7 +26,7 @@ class ItemDAO extends Conn {
                 . " AND "
                 . " ID_IT_OS_MEC_CLI_ITEM = " . $item->idItOsMecanRespItem;
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -40,7 +39,7 @@ class ItemDAO extends Conn {
         return $v;
     }
 
-    public function insItem($idCab, $item) {
+    public function insRespItem($idCab, $item, $base) {
 
         if ($item->obsRespItem == "null") {
             $obs = "null";
@@ -66,7 +65,7 @@ class ItemDAO extends Conn {
                 . " ,  TO_DATE('" . $item->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                 . " )";
 
-        $this->Conn = parent::getConn();
+        $this->Conn = parent::getConn($base);
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }
