@@ -18,7 +18,7 @@ require_once('../model/dao/ServicoDAO.class.php');
  */
 class BaseDadosCTR {
     
-    private $base = 2;
+    private $base = 1;
     
     public function dadosComponente($versao) {
         

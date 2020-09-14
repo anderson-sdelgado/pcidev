@@ -39,11 +39,11 @@ class CheckListCTR {
     private function salvarCabec($dadosCab, $dadosItem) {
         $cabecDAO = new CabecDAO();
         foreach ($dadosCab as $cab) {
-            $v = $cabecDAO->verifCabec($cab);
+            $v = $cabecDAO->verifCabec($cab, $this->base);
             if ($v == 0) {
-                $cabecDAO->insCabec($cab);
+                $cabecDAO->insCabec($cab, $this->base);
             } else {
-                $cabecDAO->updCabec($cab);
+                $cabecDAO->updCabec($cab, $this->base);
             }
             $idCab = $cabecDAO->idCabec($cab);
             $this->salvarItem($idCab, $cab->idCabec, $dadosItem);
@@ -60,9 +60,9 @@ class CheckListCTR {
         $itemDAO = new ItemDAO();
         foreach ($dadosItem as $item) {
             if ($idCabecCel == $item->idCabRespItem) {
-                $v = $itemDAO->verifItem($idCabecBD, $item);
+                $v = $itemDAO->verifItem($idCabecBD, $item, $this->base);
                 if ($v == 0) {
-                    $itemDAO->insItem($idCabecBD, $item);
+                    $itemDAO->insItem($idCabecBD, $item, $this->base);
                 }
             }
         }

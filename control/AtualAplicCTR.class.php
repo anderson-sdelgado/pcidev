@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require('./model/dao/AtualAplicDAO.class.php');
+require('../model/dao/AtualAplicDAO.class.php');
 /**
  * Description of AtualAplicCTR
  *
@@ -42,13 +42,13 @@ class AtualAplicCTR {
                     $vab = $item['VERSAO_ATUAL'];
                 }
                 if ($va != $vab) {
-                    $atualAplicDAO->updAtualNova($equip, $va, $this->base);
+                    $atualAplicDAO->updAtualNova($celular, $va, $this->base);
                 } else {
                     if ($va != $vn) {
                         $retorno = 'S';
                     } else {
                         if (strcmp($va, $vab) <> 0) {
-                            $atualAplicDAO->updAtual($equip, $va, $this->base);
+                            $atualAplicDAO->updAtual($celular, $va, $this->base);
                         }
                     }
                 }
