@@ -20,7 +20,9 @@ class CabecDAO extends Conn {
                 . " FROM "
                 . " CHECKLIST_INDUSTRIA_CABECALHO "
                 . " WHERE "
-                . " OS_CLI_CABEC = " . $cab->osCabec . " ";
+                . " DATA_CLI_CABEC = TO_DATE('" . $cab->dataCabec . "','DD/MM/YYYY HH24:MI') "
+                . " AND "
+                . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec . " ";
 
         $this->Conn = parent::getConn($base);
         $this->Read = $this->Conn->prepare($select);
@@ -70,7 +72,7 @@ class CabecDAO extends Conn {
                 . " ) "
                 . " VALUES ("
                 . " INTERFACE.CABEC_CHECKLIST_SEQ.NEXTVAL "
-                . " , " . $cab->osCabec
+                . " , " . $cab->idOSCabec
                 . " , " . $cab->idFuncCabec
                 . " , TO_DATE('" . $cab->dataCabec . "','DD/MM/YYYY HH24:MI') "
                 . " , " . $cab->statusCabec
@@ -82,21 +84,14 @@ class CabecDAO extends Conn {
     }
     
     public function updCabec($cab, $base) {
-
-        $sql = "INSERT INTO CHECKLIST_INDUSTRIA_CABECALHO ("
-                . " ID_CLI_CABEC "
-                . " , OS_CLI_CABEC "
-                . " , FUNCIONARIO_CLI_CABEC "
-                . " , DATA_CLI_CABEC "
-                . " , STATUS_CLI_CABEC "
-                . " ) "
-                . " VALUES ("
-                . " INTERFACE.CABEC_CHECKLIST_SEQ.NEXTVAL "
-                . " , " . $cab->osCabec
-                . " , " . $cab->idFuncCabec
-                . " , TO_DATE('" . $cab->dataCabec . "','DD/MM/YYYY HH24:MI') "
-                . " , " . $cab->statusCabec
-                . " )";
+                
+        $sql = "UPDATE CHECKLIST_INDUSTRIA_CABECALHO "
+                . " SET "
+                . " STATUS_CLI_CABEC = " . $cab->statusCabec
+                . " WHERE "
+                . " DATA_CLI_CABEC = TO_DATE('" . $cab->dataCabec . "','DD/MM/YYYY HH24:MI') "
+                . " AND "
+                . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec;
 
         $this->Conn = parent::getConn($base);
         $this->Create = $this->Conn->prepare($sql);

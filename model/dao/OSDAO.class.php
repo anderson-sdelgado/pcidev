@@ -35,8 +35,8 @@ class OSDAO extends Conn {
                 . " USINAS.V_OS_CHECKLIST_IND "
                 . " WHERE "
                 . " OFICSECAO_ID = " . $dado
-                . " AND " 
-                . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC";
+                . " AND "
+                . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC ";
 
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
