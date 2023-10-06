@@ -13,7 +13,7 @@ require_once('../dbutil/Conn.class.php');
  */
 class RespItemDAO extends Conn {
 
-    public function verifRespItem($idCab, $item, $base) {
+    public function verifRespItem($idCab, $item) {
 
         $select = " SELECT "
                 . " COUNT(*) AS QTDE "
@@ -26,7 +26,7 @@ class RespItemDAO extends Conn {
                 . " AND "
                 . " ID_IT_OS_MEC_CLI_ITEM = " . $item->idItOsMecanRespItem;
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -39,7 +39,7 @@ class RespItemDAO extends Conn {
         return $v;
     }
 
-    public function insRespItem($idCab, $item, $base) {
+    public function insRespItem($idCab, $item) {
 
         if ($item->obsRespItem == "null") {
             $obs = "null";
@@ -65,7 +65,7 @@ class RespItemDAO extends Conn {
                 . " ,  TO_DATE('" . $item->dthrRespItem . "','DD/MM/YYYY HH24:MI') "
                 . " )";
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }

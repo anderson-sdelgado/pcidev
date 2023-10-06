@@ -7,6 +7,6 @@ $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 if (isset($info)):
 
     $checkListCTR = new CheckListCTR();
-    echo $checkListCTR->salvarDados($info, "inserirchecklist");
+    echo $checkListCTR->salvarDados($info);
 
 endif;

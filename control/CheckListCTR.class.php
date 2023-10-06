@@ -5,9 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('../model/dao/LogDAO.class.php');
-require_once('../model/dao/CabecDAO.class.php');
-require_once('../model/dao/RespItemDAO.class.php');
+require_once('../model/CabecDAO.class.php');
+require_once('../model/RespItemDAO.class.php');
 
 /**
  * Description of InserirDadosCTR
@@ -16,12 +15,9 @@ require_once('../model/dao/RespItemDAO.class.php');
  */
 class CheckListCTR {
 
-    private $base = 2;
-
-    public function salvarDados($info, $pagina) {
+    public function salvarDados($info) {
 
         $dados = $info['dado'];
-        $this->salvarLog($dados, $pagina, $this->base);
 
         $pos1 = strpos($dados, "_") + 1;
         $pos2 = strpos($dados, "#") + 1;
@@ -45,13 +41,13 @@ class CheckListCTR {
         $cabecDAO = new CabecDAO();
         $idCabecArray = array();
         foreach ($dadosCab as $cab) {
-            $v = $cabecDAO->verifCabec($cab, $this->base);
+            $v = $cabecDAO->verifCabec($cab);
             if ($v == 0) {
-                $cabecDAO->insCabec($cab, $this->base);
+                $cabecDAO->insCabec($cab);
             } else {
-                $cabecDAO->updCabec($cab, $this->base);
+                $cabecDAO->updCabec($cab);
             }
-            $idCab = $cabecDAO->idCabec($cab, $this->base);
+            $idCab = $cabecDAO->idCabec($cab);
             $retPlanta = $this->salvarPlantaItem($idCab, $cab->idCabec, $dadosPlanta, $dadosItem);
             $idCabecArray[] = array("idCabec" => $cab->idCabec);
         }
@@ -67,9 +63,9 @@ class CheckListCTR {
             if($idCabecCel == $planta->idCabec) {
                 foreach ($dadosItem as $item) {
                     if($planta->idPlantaCabec == $item->idPlantaCabecItem) {
-                        $v = $respItemDAO->verifRespItem($idCabecBD, $item, $this->base);
+                        $v = $respItemDAO->verifRespItem($idCabecBD, $item);
                         if ($v == 0) {
-                            $respItemDAO->insRespItem($idCabecBD, $item, $this->base);
+                            $respItemDAO->insRespItem($idCabecBD, $item);
                         }
                     }
                 }
@@ -81,9 +77,4 @@ class CheckListCTR {
         return $retPlanta;
     }
     
-    private function salvarLog($dados, $pagina) {
-        $logDAO = new LogDAO();
-        $logDAO->salvarDados($dados, $pagina, $this->base);
-    }
-
 }

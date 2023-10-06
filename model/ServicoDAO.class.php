@@ -7,11 +7,11 @@
  */
 require_once('../dbutil/Conn.class.php');
 /**
- * Description of PlantaDAO
+ * Description of ItemDAO
  *
  * @author anderson
  */
-class PlantaDAO extends Conn {
+class ServicoDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -20,23 +20,24 @@ class PlantaDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($base) {
+    public function dados() {
 
         $select = " SELECT "
-                    . " COMPONENTE_ID AS \"idPlanta\" "
-                    . " , PLANTA_CD AS \"codPlanta\" "
-                    . " , CARACTER(PLANTA_DESCR) AS \"descrPlanta\" "
+                    . " SERVICO_ID AS \"idServico\" " 
+                    . " , CODIGO AS \"codServico\" "
+                    . " , CARACTER(DESCR) AS \"descrServico\" " 
                 . " FROM "
-                    . " USINAS.V_PLANTAS_CHECKLIST_IND ";
+                    . " USINAS.V_SERVICOS_IND ";
         
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
         $result = $this->Read->fetchAll();
 
         return $result;
-        
-    }
     
+    }
+
+
 }

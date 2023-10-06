@@ -13,7 +13,7 @@ require_once('../dbutil/Conn.class.php');
  */
 class CabecDAO extends Conn {
 
-    public function verifCabec($cab, $base) {
+    public function verifCabec($cab) {
 
         $select = " SELECT "
                 . " COUNT(*) AS QTDE "
@@ -24,7 +24,7 @@ class CabecDAO extends Conn {
                 . " AND "
                 . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec . " ";
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -37,7 +37,7 @@ class CabecDAO extends Conn {
         return $v;
     }
 
-    public function idCabec($cab, $base) {
+    public function idCabec($cab) {
 
         $select = " SELECT "
                 . " ID_CLI_CABEC AS ID "
@@ -48,7 +48,7 @@ class CabecDAO extends Conn {
                 . " AND "
                 . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec . " ";
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
@@ -61,7 +61,7 @@ class CabecDAO extends Conn {
         return $id;
     }
 
-    public function insCabec($cab, $base) {
+    public function insCabec($cab) {
 
         $sql = "INSERT INTO CHECKLIST_INDUSTRIA_CABECALHO ("
                 . " ID_CLI_CABEC "
@@ -78,12 +78,12 @@ class CabecDAO extends Conn {
                 . " , " . $cab->statusCabec
                 . " )";
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }
     
-    public function updCabec($cab, $base) {
+    public function updCabec($cab) {
                 
         $sql = "UPDATE CHECKLIST_INDUSTRIA_CABECALHO "
                 . " SET "
@@ -93,7 +93,7 @@ class CabecDAO extends Conn {
                 . " AND "
                 . " FUNCIONARIO_CLI_CABEC = " . $cab->idFuncCabec;
 
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }

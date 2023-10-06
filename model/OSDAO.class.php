@@ -20,9 +20,7 @@ class OSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($dado, $base) {
-
-        $this->Conn = parent::getConn($base);
+    public function dados($idOficSecao) {
 
         $select = " SELECT "
                 . " OS_ID AS \"idOS\" "
@@ -34,10 +32,11 @@ class OSDAO extends Conn {
                 . " FROM "
                 . " USINAS.V_OS_CHECKLIST_IND "
                 . " WHERE "
-                . " OFICSECAO_ID = " . $dado
+                . " OFICSECAO_ID = " . $idOficSecao
                 . " AND "
                 . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC ";
 
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();

@@ -7,11 +7,11 @@
  */
 require_once('../dbutil/Conn.class.php');
 /**
- * Description of FuncionarioDAO
+ * Description of PlantaDAO
  *
  * @author anderson
  */
-class FuncionarioDAO extends Conn {
+class PlantaDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -20,20 +20,16 @@ class FuncionarioDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($base) {
+    public function dados() {
 
         $select = " SELECT "
-                    . " MATRICULA AS \"matricFunc\" "
-                    . " , CARACTER(NOME_FUNC) AS \"nomeFunc\" "
-                    . " , FUNC_ID AS \"idFunc\" "
-                    . " , OFICSECAO_ID AS \"idOficSecaoFunc\" "
+                    . " COMPONENTE_ID AS \"idPlanta\" "
+                    . " , PLANTA_CD AS \"codPlanta\" "
+                    . " , CARACTER(PLANTA_DESCR) AS \"descrPlanta\" "
                 . " FROM "
-                    . " USINAS.V_FUNC_APONT_INDUSTRIA "
-                . " ORDER BY "
-                        . " MATRICULA "
-                . " ASC ";
+                    . " USINAS.V_PLANTAS_CHECKLIST_IND ";
         
-        $this->Conn = parent::getConn($base);
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();

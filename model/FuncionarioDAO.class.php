@@ -7,11 +7,11 @@
  */
 require_once('../dbutil/Conn.class.php');
 /**
- * Description of VerItemDAO
+ * Description of FuncionarioDAO
  *
  * @author anderson
  */
-class ItemOSDAO extends Conn {
+class FuncionarioDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -20,28 +20,27 @@ class ItemOSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($dado, $base) {
-
-        $this->Conn = parent::getConn($base);
+    public function dados() {
 
         $select = " SELECT "
-                . " ITOSMECAN_ID AS \"idItem\" "
-                . " , SEQ AS \"seqItem\" "
-                . " , OS_ID AS \"idOsItem\" "
-                . " , COMPONENTE_ID AS \"idPlantaItem\" "
-                . " , SERVICO_ID AS \"idServicoItem\" "
-                . " , NVL(EQUIPCOMPO_ID, 0) AS \"idComponenteItem\" "
+                    . " MATRICULA AS \"matricFunc\" "
+                    . " , CARACTER(NOME_FUNC) AS \"nomeFunc\" "
+                    . " , FUNC_ID AS \"idFunc\" "
+                    . " , OFICSECAO_ID AS \"idOficSecaoFunc\" "
                 . " FROM "
-                . " USINAS.V_ITOS_CHECKLIST_IND "
-                . " WHERE "
-                . " OS_ID = " . $dado;
+                    . " USINAS.V_FUNC_APONT_INDUSTRIA "
+                . " ORDER BY "
+                        . " MATRICULA "
+                . " ASC ";
         
+        $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();
         $result = $this->Read->fetchAll();
 
         return $result;
+        
     }
     
 }

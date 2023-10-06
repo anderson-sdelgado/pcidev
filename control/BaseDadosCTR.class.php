@@ -5,12 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('../model/dao/ComponenteDAO.class.php');
-require_once('../model/dao/FuncionarioDAO.class.php');
-require_once('../model/dao/ItemOSDAO.class.php');
-require_once('../model/dao/OSDAO.class.php');
-require_once('../model/dao/PlantaDAO.class.php');
-require_once('../model/dao/ServicoDAO.class.php');
+require_once('../control/AtualAplicCTR.class.php');
+require_once('../model/AtualAplicDAO.class.php');
+require_once('../model/ComponenteDAO.class.php');
+require_once('../model/FuncionarioDAO.class.php');
+require_once('../model/ItemOSDAO.class.php');
+require_once('../model/OSDAO.class.php');
+require_once('../model/PlantaDAO.class.php');
+require_once('../model/ServicoDAO.class.php');
 /**
  * Description of BaseDadosCTR
  *
@@ -18,89 +20,101 @@ require_once('../model/dao/ServicoDAO.class.php');
  */
 class BaseDadosCTR {
     
-    private $base = 1;
-    
-    public function dadosComponente($versao) {
+    public function dadosComponente($info) {
+
+        $atualAplicCTR = new AtualAplicCTR();
         
-        $versao = str_replace("_", ".", $versao);
-       
-        if($versao >= 2.00){
-            
+        if($atualAplicCTR->verifToken($info)){
+
             $componenteDAO = new ComponenteDAO();
-        
-            $dados = array("dados"=>$componenteDAO->dados($this->base));
+
+            $dados = array("dados"=>$componenteDAO->dados());
             $json_str = json_encode($dados);
 
             return $json_str;
         
         }
-        
+
     }
     
-     public function dadosFunc($versao) {
+     public function dadosFunc($info) {
+
+        $atualAplicCTR = new AtualAplicCTR();
         
-        $versao = str_replace("_", ".", $versao);
-        
-        if($versao >= 2.00){
+        if($atualAplicCTR->verifToken($info)){
             
             $funcionarioDAO = new FuncionarioDAO();
-       
-            $dados = array("dados"=>$funcionarioDAO->dados($this->base));
+
+            $dados = array("dados"=>$funcionarioDAO->dados());
             $json_str = json_encode($dados);
 
             return $json_str;
-        
+       
         }
-        
+
     }
     
-    public function dadosItemOS($info, $versao) {
+    public function dadosItemOS($info) {
 
-        $versao = str_replace("_", ".", $versao);
+        $itemOSDAO = new ItemOSDAO();
+        $atualAplicDAO = new AtualAplicDAO();
+
+        $jsonObj = json_decode($info['dado']);
+        $dados = $jsonObj->dados;
+
+        foreach ($dados as $d) {
+            $idOS = $d->idOS;
+            $token = $d->token;
+        }
+
+        $v = $atualAplicDAO->verToken($token);
         
-        if($versao >= 2.00){
-            
-            $itemOSDAO = new ItemOSDAO();
+        if ($v > 0) {
 
-            $dado = $info['dado'];
-
-            $dadosItemOS = array("dados" => $itemOSDAO->dados($dado, $this->base));
+            $dadosItemOS = array("dados" => $itemOSDAO->dados($idOS));
             $resItemOS = json_encode($dadosItemOS);
 
             return $resItemOS;
         
         }
-            
+
     }
     
-    public function dadosOS($info, $versao) {
+    public function dadosOS($info) {
+
+        $osDAO = new OSDAO();
+        $atualAplicDAO = new AtualAplicDAO();
+
+        $jsonObj = json_decode($info['dado']);
+        $dados = $jsonObj->dados;
+
+        foreach ($dados as $d) {
+            $idOficSecao = $d->idOficSecao;
+            $token = $d->token;
+        }
+
+        $v = $atualAplicDAO->verToken($token);
         
-        $versao = str_replace("_", ".", $versao);
-        
-        if($versao >= 2.00){
+        if ($v > 0) {
 
-            $osDAO = new OSDAO();
-
-            $dado = $info['dado'];
-
-            $dadosOS = array("dados" => $osDAO->dados($dado, $this->base));
+            $dadosOS = array("dados" => $osDAO->dados($idOficSecao));
             $resOS = json_encode($dadosOS);
 
             return $resOS;
         
         }
-                
+                 
     }
     
-    public function dadosPlanta($versao) {
+    public function dadosPlanta($info) {
+
+        $atualAplicCTR = new AtualAplicCTR();
         
-        $versao = str_replace("_", ".", $versao);
-        
-        if($versao >= 2.00){
-        
+        if($atualAplicCTR->verifToken($info)){
+            
             $plantaDAO = new PlantaDAO();
 
-            $dados = array("dados"=>$plantaDAO->dados($this->base));
+            $dados = array("dados"=>$plantaDAO->dados());
             $json_str = json_encode($dados);
 
             return $json_str;
@@ -109,15 +123,15 @@ class BaseDadosCTR {
         
     }
     
-    public function dadosServico($versao) {
+    public function dadosServico($info) {
+
+        $atualAplicCTR = new AtualAplicCTR();
         
-        $versao = str_replace("_", ".", $versao);
-        
-        if($versao >= 2.00){
-        
+        if($atualAplicCTR->verifToken($info)){
+            
             $servicoDAO = new ServicoDAO();
 
-            $dados = array("dados"=>$servicoDAO->dados($this->base));
+            $dados = array("dados"=>$servicoDAO->dados());
             $json_str = json_encode($dados);
 
             return $json_str;
