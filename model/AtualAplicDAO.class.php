@@ -83,25 +83,6 @@ class AtualAplicDAO extends Conn {
         $this->Create->execute();
     }
 
-    public function retAtual($nroAparelho) {
-
-        $select = " SELECT "
-                        . " VERSAO_NOVA "
-                        . " , VERSAO_ATUAL"
-                    . " FROM "
-                        . " PCI_ATUAL "
-                    . " WHERE "
-                        . " NRO_APARELHO = " . $nroAparelho;
-
-        $this->Conn = parent::getConn();
-        $this->Read = $this->Conn->prepare($select);
-        $this->Read->setFetchMode(PDO::FETCH_ASSOC);
-        $this->Read->execute();
-        $result = $this->Read->fetchAll();
-
-        return $result;
-    }
-
     public function updAtual($nroAparelho, $versao) {
 
         $sql = "UPDATE PCI_ATUAL "
