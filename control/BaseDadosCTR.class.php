@@ -55,23 +55,13 @@ class BaseDadosCTR {
     }
     
     public function dadosItemOS($info) {
-
-        $itemOSDAO = new ItemOSDAO();
-        $atualAplicDAO = new AtualAplicDAO();
-
-        $jsonObj = json_decode($info['dado']);
-        $dados = $jsonObj->dados;
-
-        foreach ($dados as $d) {
-            $idOS = $d->idOS;
-            $token = $d->token;
-        }
-
-        $v = $atualAplicDAO->verToken($token);
         
-        if ($v > 0) {
-
-            $dadosItemOS = array("dados" => $itemOSDAO->dados($idOS));
+        $atualAplicCTR = new AtualAplicCTR();
+        
+        if($atualAplicCTR->verifToken($info)){
+            
+            $itemOSDAO = new ItemOSDAO();
+            $dadosItemOS = array("dados" => $itemOSDAO->dados());
             $resItemOS = json_encode($dadosItemOS);
 
             return $resItemOS;
@@ -82,22 +72,12 @@ class BaseDadosCTR {
     
     public function dadosOS($info) {
 
-        $osDAO = new OSDAO();
-        $atualAplicDAO = new AtualAplicDAO();
-
-        $jsonObj = json_decode($info['dado']);
-        $dados = $jsonObj->dados;
-
-        foreach ($dados as $d) {
-            $idOficSecao = $d->idOficSecao;
-            $token = $d->token;
-        }
-
-        $v = $atualAplicDAO->verToken($token);
+        $atualAplicCTR = new AtualAplicCTR();
         
-        if ($v > 0) {
-
-            $dadosOS = array("dados" => $osDAO->dados($idOficSecao));
+        if($atualAplicCTR->verifToken($info)){
+            
+            $osDAO = new OSDAO();
+            $dadosOS = array("dados" => $osDAO->dados());
             $resOS = json_encode($dadosOS);
 
             return $resOS;

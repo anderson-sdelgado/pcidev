@@ -20,21 +20,19 @@ class OSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($idOficSecao) {
+    public function dados() {
 
         $select = " SELECT "
-                . " OS_ID AS \"idOS\" "
-                . " , OS_NRO AS \"nroOS\" "
-                . " , COMPONENTE_ID AS \"idPlantaOS\" "
-                . " , PERIODO AS \"qtdeDiaOS\" "
-                . " , TIPO_PERIODO AS \"descrPeriodo\" "
-                . " , 0 AS \"statusOS\" "
+                    . " OS_ID AS \"idOS\" "
+                    . " , OS_NRO AS \"nroOS\" "
+                    . " , COMPONENTE_ID AS \"idPlantaOS\" "
+                    . " , PERIODO AS \"qtdeDiaOS\" "
+                    . " , TIPO_PERIODO AS \"descrPeriodo\" "
+                    . " , 0 AS \"statusOS\" "
                 . " FROM "
-                . " USINAS.V_OS_CHECKLIST_IND "
+                    . " USINAS.V_OS_CHECKLIST_IND "
                 . " WHERE "
-                . " OFICSECAO_ID = " . $idOficSecao
-                . " AND "
-                . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC ";
+                    . " SYSDATE BETWEEN DT_PREV_INIC AND DT_PREV_TERM_CALC ";
 
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);

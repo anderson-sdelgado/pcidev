@@ -20,20 +20,18 @@ class ItemOSDAO extends Conn {
     /** @var PDO */
     private $Conn;
 
-    public function dados($idOS) {
+    public function dados() {
 
 
         $select = " SELECT "
-                . " ITOSMECAN_ID AS \"idItem\" "
-                . " , SEQ AS \"seqItem\" "
-                . " , OS_ID AS \"idOsItem\" "
-                . " , COMPONENTE_ID AS \"idPlantaItem\" "
-                . " , SERVICO_ID AS \"idServicoItem\" "
-                . " , NVL(EQUIPCOMPO_ID, 0) AS \"idComponenteItem\" "
+                    . " ITOSMECAN_ID AS \"idItem\" "
+                    . " , SEQ AS \"seqItem\" "
+                    . " , OS_ID AS \"idOsItem\" "
+                    . " , COMPONENTE_ID AS \"idPlantaItem\" "
+                    . " , SERVICO_ID AS \"idServicoItem\" "
+                    . " , NVL(EQUIPCOMPO_ID, 0) AS \"idComponenteItem\" "
                 . " FROM "
-                . " USINAS.V_ITOS_CHECKLIST_IND "
-                . " WHERE "
-                . " OS_ID = " . $idOS;
+                    . " USINAS.V_ITOS_CHECKLIST_IND ";
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
